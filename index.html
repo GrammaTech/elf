@@ -46,38 +46,73 @@ href="http://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a>.
     <ol>
       <li><a href="#*class*"><code>*class*</code></a></li>
       <li><a href="#*endian*"><code>*endian*</code></a></li>
+      <li><a href="#*single-value-objdump-hack*"><code>*single-value-objdump-hack*</code></a></li>
       <li><a href="#addralign"><code>addralign</code></a></li>
       <li><a href="#address"><code>address</code></a></li>
       <li><a href="#align"><code>align</code></a></li>
       <li><a href="#alignment"><code>alignment</code></a></li>
+      <li><a href="#arm-data"><code>arm-data</code></a></li>
+      <li><a href="#arm-instruction"><code>arm-instruction</code></a></li>
+      <li><a href="#b/bl"><code>b/bl</code></a></li>
       <li><a href="#binding"><code>binding</code></a></li>
+      <li><a href="#bits-at-ea"><code>bits-at-ea</code></a></li>
+      <li><a href="#bits-to-int"><code>bits-to-int</code></a></li>
+      <li><a href="#bx"><code>bx</code></a></li>
       <li><a href="#bytes-to-int"><code>bytes-to-int</code></a></li>
       <li><a href="#copy-elf"><code>copy-elf</code></a></li>
+      <li><a href="#csurf"><code>csurf</code></a></li>
+      <li><a href="#csurf-cmd"><code>csurf-cmd</code></a></li>
+      <li><a href="#csurf-script"><code>csurf-script</code></a></li>
       <li><a href="#data"><code>data</code></a></li>
+      <li><a href="#data-processing"><code>data-processing</code></a></li>
+      <li><a href="#disassemblable"><code>disassemblable</code></a></li>
+      <li><a href="#disassemble-section"><code>disassemble-section</code></a></li>
       <li><a href="#elf"><code>elf</code></a></li>
       <li><a href="#elf"><code>elf</code></a></li>
+      <li><a href="#elf-const"><code>elf-const</code></a></li>
+      <li><a href="#elf-header"><code>elf-header</code></a></li>
+      <li><a href="#elf-header"><code>elf-header</code></a></li>
       <li><a href="#elf-p"><code>elf-p</code></a></li>
+      <li><a href="#entry"><code>entry</code></a></li>
       <li><a href="#entsize"><code>entsize</code></a></li>
+      <li><a href="#file-offset-of-ea"><code>file-offset-of-ea</code></a></li>
       <li><a href="#filesz"><code>filesz</code></a></li>
       <li><a href="#flags"><code>flags</code></a></li>
+      <li><a href="#from-bits"><code>from-bits</code></a></li>
+      <li><a href="#from-bytes"><code>from-bytes</code></a></li>
       <li><a href="#generic-copy"><code>generic-copy</code></a></li>
       <li><a href="#header"><code>header</code></a></li>
+      <li><a href="#index-of-ea"><code>index-of-ea</code></a></li>
       <li><a href="#info"><code>info</code></a></li>
+      <li><a href="#insert"><code>insert</code></a></li>
+      <li><a href="#instruction"><code>instruction</code></a></li>
+      <li><a href="#int-to-bits"><code>int-to-bits</code></a></li>
       <li><a href="#int-to-bytes"><code>int-to-bytes</code></a></li>
+      <li><a href="#ldm/stm"><code>ldm/stm</code></a></li>
+      <li><a href="#ldr/str"><code>ldr/str</code></a></li>
       <li><a href="#link"><code>link</code></a></li>
       <li><a href="#magic-number"><code>magic-number</code></a></li>
+      <li><a href="#make-arm-branch"><code>make-arm-branch</code></a></li>
+      <li><a href="#make-arm-data-processing"><code>make-arm-data-processing</code></a></li>
+      <li><a href="#make-arm-data-transfer"><code>make-arm-data-transfer</code></a></li>
+      <li><a href="#make-arm-stack"><code>make-arm-stack</code></a></li>
+      <li><a href="#make-arm-word"><code>make-arm-word</code></a></li>
       <li><a href="#mapslots"><code>mapslots</code></a></li>
       <li><a href="#memsz"><code>memsz</code></a></li>
       <li><a href="#name"><code>name</code></a></li>
       <li><a href="#named-section"><code>named-section</code></a></li>
       <li><a href="#named-symbol"><code>named-symbol</code></a></li>
       <li><a href="#objdump"><code>objdump</code></a></li>
+      <li><a href="#objdump"><code>objdump</code></a></li>
+      <li><a href="#objdump-cmd"><code>objdump-cmd</code></a></li>
+      <li><a href="#objdump-const"><code>objdump-const</code></a></li>
       <li><a href="#objdump-parse"><code>objdump-parse</code></a></li>
       <li><a href="#offset"><code>offset</code></a></li>
+      <li><a href="#opcode"><code>opcode</code></a></li>
+      <li><a href="#operands"><code>operands</code></a></li>
       <li><a href="#ordering"><code>ordering</code></a></li>
       <li><a href="#other"><code>other</code></a></li>
       <li><a href="#paddr"><code>paddr</code></a></li>
-      <li><a href="#parse-addresses"><code>parse-addresses</code></a></li>
       <li><a href="#ph"><code>ph</code></a></li>
       <li><a href="#program-table"><code>program-table</code></a></li>
       <li><a href="#ptr"><code>ptr</code></a></li>
@@ -86,8 +121,17 @@ href="http://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a>.
       <li><a href="#rel-info"><code>rel-info</code></a></li>
       <li><a href="#rel-sym"><code>rel-sym</code></a></li>
       <li><a href="#rel-type"><code>rel-type</code></a></li>
+      <li><a href="#section-holding-ea"><code>section-holding-ea</code></a></li>
+      <li><a href="#section-holding-off"><code>section-holding-off</code></a></li>
       <li><a href="#section-table"><code>section-table</code></a></li>
       <li><a href="#sections"><code>sections</code></a></li>
+      <li><a href="#sections-holding-ea"><code>sections-holding-ea</code></a></li>
+      <li><a href="#sections-holding-off"><code>sections-holding-off</code></a></li>
+      <li><a href="#set-arm-branch"><code>set-arm-branch</code></a></li>
+      <li><a href="#set-arm-data-processing"><code>set-arm-data-processing</code></a></li>
+      <li><a href="#set-arm-data-transfer"><code>set-arm-data-transfer</code></a></li>
+      <li><a href="#set-arm-stack"><code>set-arm-stack</code></a></li>
+      <li><a href="#set-arm-word"><code>set-arm-word</code></a></li>
       <li><a href="#sh"><code>sh</code></a></li>
       <li><a href="#shndx"><code>shndx</code></a></li>
       <li><a href="#show-dynamic"><code>show-dynamic</code></a></li>
@@ -95,14 +139,20 @@ href="http://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a>.
       <li><a href="#show-memory-layout"><code>show-memory-layout</code></a></li>
       <li><a href="#show-symbols"><code>show-symbols</code></a></li>
       <li><a href="#size"><code>size</code></a></li>
+      <li><a href="#subseq-ea"><code>subseq-ea</code></a></li>
+      <li><a href="#subseq-off"><code>subseq-off</code></a></li>
       <li><a href="#sym-name"><code>sym-name</code></a></li>
       <li><a href="#symbols"><code>symbols</code></a></li>
+      <li><a href="#to-bits"><code>to-bits</code></a></li>
+      <li><a href="#to-bytes"><code>to-bytes</code></a></li>
       <li><a href="#type"><code>type</code></a></li>
       <li><a href="#un-type"><code>un-type</code></a></li>
       <li><a href="#vaddr"><code>vaddr</code></a></li>
       <li><a href="#val"><code>val</code></a></li>
       <li><a href="#value"><code>value</code></a></li>
       <li><a href="#vma"><code>vma</code></a></li>
+      <li><a href="#word-at-ea"><code>word-at-ea</code></a></li>
+      <li><a href="#word-at-off"><code>word-at-off</code></a></li>
       <li><a href="#write-elf"><code>write-elf</code></a></li>
       <li><a href="#write-value"><code>write-value</code></a></li>
     </ol>
@@ -123,7 +173,7 @@ specific information translated from <code>/usr/include/elf.h</code>.</p>
 
 <h1>Example Usage</h1>
 
-<h2>load the elf library </h2>
+<h2>load the elf library</h2>
 
 <p>First load the up the <code>elf</code> library.</p>
 
@@ -131,9 +181,9 @@ specific information translated from <code>/usr/include/elf.h</code>.</p>
 (in-package :elf)
 </code></pre>
 
-<h2>create a simple elf binary and confirm it is an elf file </h2>
+<h2>create a simple elf binary and confirm it is an elf file</h2>
 
-<p>For the remainder of this example, we'll use a simple elf binary
+<p>For the remainder of this example, we&rsquo;ll use a simple elf binary
 executable named =hello=, compiled from the following C code.</p>
 
 <pre><code>echo 'main(){puts("hello world");}'|gcc -x c - -o hello
@@ -145,7 +195,13 @@ number at the start of the file.</p>
 <pre><code>(elf-p "hello") ; =&gt; T
 </code></pre>
 
-<h2>read an elf object, and view it's header information </h2>
+<p>We can also view an elf files header information without parsing
+the entire file.</p>
+
+<pre><code>(elf::show-it (elf-header "hello") :out nil)
+</code></pre>
+
+<h2>read an elf object, and view it&rsquo;s header information</h2>
 
 <p>Then we read the binary file into an elf object.</p>
 
@@ -158,7 +214,7 @@ the header at the top of the elf file.</p>
 <pre><code>(elf::show-it (header *elf*) :out nil)
 </code></pre>
 
-<h2>view section-table and program-table information </h2>
+<h2>view section-table and program-table information</h2>
 
 <p>We can list the names of the sections of the elf file.</p>
 
@@ -167,7 +223,7 @@ the header at the top of the elf file.</p>
 </code></pre>
 
 <p>We can list the segments in the program table, and view both the
-layout of the elements of the elf file, both in it's binary file
+layout of the elements of the elf file, both in it&rsquo;s binary file
 and when it is an executable image in memory.</p>
 
 <pre><code>;; looking at the program table
@@ -183,21 +239,21 @@ TYPE:GNU_STACK FLAGS:6 OFFSET:0 VADDR:0 PADDR:0 FILESZ:0 MEM...
 
 ;; view the contents of elf, as they exist in the file
 (show-file-layout *elf*)
-START    OFFSET   CONTENTS           END     
-0        NONE     HEADER             64      
-64       NONE     PROGRAM-TABLE      512     
-512      512      .interp            540     
-540      540      .note.ABI-tag      572     
-572      572      .note.gnu.build-id 608     
-608      608      .gnu.hash          636     
-636      NONE     FILLER             640     
-640      640      .dynsym            736     
-736      736      .dynstr            797     
+START    OFFSET   CONTENTS           END
+0        NONE     HEADER             64
+64       NONE     PROGRAM-TABLE      512
+512      512      .interp            540
+540      540      .note.ABI-tag      572
+572      572      .note.gnu.build-id 608
+608      608      .gnu.hash          636
+636      NONE     FILLER             640
+640      640      .dynsym            736
+736      736      .dynstr            797
 ...
 
 ;; view the contents of elf, as they exist in the file
 (show-memory-layout *elf*)
-addr     contents          end     
+addr     contents          end
 -------------------------------------
 0x400000 LOAD               0x4006CC
 0x400040 PHDR               0x400200
@@ -208,7 +264,7 @@ addr     contents          end
 ...
 </code></pre>
 
-<h2>write an elf object to disk </h2>
+<h2>write an elf object to disk</h2>
 
 <p>We can write out the elf file to disk.</p>
 
@@ -223,7 +279,7 @@ which the elf object was read.</p>
 <pre><code>diff hello hello2
 </code></pre>
 
-<h2>manipulate the contents of an elf object </h2>
+<h2>manipulate the contents of an elf object</h2>
 
 <p>We can manipulate these elf objects, and then write the results
 back out to disk.  For example we can change the code in the
@@ -291,6 +347,21 @@ Controls the endianness of how bytes are read.
 </blockquote>
 
 <!-- End of entry for *ENDIAN* -->
+
+
+<!-- Entry for *SINGLE-VALUE-OBJDUMP-HACK* -->
+
+<p><br>[Special variable]<br><a class=none name='*single-value-objdump-hack*'><b>*single-value-objdump-hack*</b></a>
+<blockquote><br>
+
+Set to non-nil if objdump prints 4-byte values as a single number.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for *SINGLE-VALUE-OBJDUMP-HACK* -->
 
 
 <!-- Entry for ADDRALIGN -->
@@ -398,8 +469,8 @@ automatically generated reader method
 
 <!-- Entry for ALIGNMENT -->
 
-<p><br>[Generic accessor]<br><a class=none name='alignment'><b>alignment</b> <i>sec</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>alignment</b> <i>sec</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<p><br>[Generic accessor]<br><a class=none name='alignment'><b>alignment</b> <i>section</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>alignment</b> <i>section</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -411,8 +482,8 @@ automatically generated reader method
 
 <!-- Entry for ALIGNMENT -->
 
-<p><br>[Specialized accessor]<br><a class=none><b>alignment</b> <i>(sec section)</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>alignment</b> <i>(sec section)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<p><br>[Specialized accessor]<br><a class=none><b>alignment</b> <i>(section section)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>alignment</b> <i>(section section)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -422,9 +493,46 @@ automatically generated reader method
 <!-- End of entry for ALIGNMENT -->
 
 
+<!-- Entry for ARM-DATA -->
+
+<p><br>[Standard class]<br><a class=none name='arm-data'><b>arm-data</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ARM-DATA -->
+
+
+<!-- Entry for ARM-INSTRUCTION -->
+
+<p><br>[Standard class]<br><a class=none name='arm-instruction'><b>arm-instruction</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ARM-INSTRUCTION -->
+
+
+<!-- Entry for B/BL -->
+
+<p><br>[Standard class]<br><a class=none name='b/bl'><b>b/bl</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for B/BL -->
+
+
 <!-- Entry for BINDING -->
 
-<p><br>[Generic function]<br><a class=none name='binding'><b>binding</b> <i>sym</i> =&gt; <i>result</i></a>
+<p><br>[Generic accessor]<br><a class=none name='binding'><b>binding</b> <i>sym</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>binding</b> <i>symbol</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -436,7 +544,8 @@ automatically generated reader method
 
 <!-- Entry for BINDING -->
 
-<p><br>[Method]<br><a class=none><b>binding</b> <i>(sym elf-sym)</i> =&gt; <i>result</i></a>
+<p><br>[Specialized accessor]<br><a class=none><b>binding</b> <i>(sym elf-sym)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>binding</b> <i>(symbol elf-sym)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -444,11 +553,74 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for BINDING -->
+
+
+<!-- Entry for BITS-AT-EA -->
+
+<p><br>[Generic accessor]<br><a class=none name='bits-at-ea'><b>bits-at-ea</b> <i>obj ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>bits-at-ea</b> <i>obj ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for BITS-AT-EA -->
+
+
+<!-- Entry for BITS-AT-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>bits-at-ea</b> <i>(obj elf) ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>bits-at-ea</b> <i>(obj elf) ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for BITS-AT-EA -->
+
+
+<!-- Entry for BITS-AT-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>bits-at-ea</b> <i>(obj section) ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>bits-at-ea</b> <i>(obj section) ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for BITS-AT-EA -->
+
+
+<!-- Entry for BITS-TO-INT -->
+
+<p><br>[Function]<br><a class=none name='bits-to-int'><b>bits-to-int</b> <i>bits <tt>&amp;optional</tt> signed-p</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for BITS-TO-INT -->
+
+
+<!-- Entry for BX -->
+
+<p><br>[Standard class]<br><a class=none name='bx'><b>bx</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for BX -->
 
 
 <!-- Entry for BYTES-TO-INT -->
 
-<p><br>[Function]<br><a class=none name='bytes-to-int'><b>bytes-to-int</b> <i>bytes <tt>&amp;optional</tt> signed-p <tt>&amp;aux</tt> steps</i> =&gt; <i>result</i></a>
+<p><br>[Function]<br><a class=none name='bytes-to-int'><b>bytes-to-int</b> <i>bytes <tt>&amp;optional</tt> signed-p byte-size <tt>&amp;aux</tt> steps</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 
@@ -470,10 +642,46 @@ automatically generated reader method
 <!-- End of entry for COPY-ELF -->
 
 
+<!-- Entry for CSURF -->
+
+<p><br>[Standard class]<br><a class=none name='csurf'><b>csurf</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for CSURF -->
+
+
+<!-- Entry for CSURF-CMD -->
+
+<p><br>[Special variable]<br><a class=none name='csurf-cmd'><b>csurf-cmd</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for CSURF-CMD -->
+
+
+<!-- Entry for CSURF-SCRIPT -->
+
+<p><br>[Special variable]<br><a class=none name='csurf-script'><b>csurf-script</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for CSURF-SCRIPT -->
+
+
 <!-- Entry for DATA -->
 
 <p><br>[Generic accessor]<br><a class=none name='data'><b>data</b> <i>object</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>data</b> <i>sec</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<br><a class=none><tt>(setf (</tt><b>data</b> <i>section</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -485,8 +693,7 @@ automatically generated reader method
 
 <!-- Entry for DATA -->
 
-<p><br>[Specialized accessor]<br><a class=none><b>data</b> <i>(object section)</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>data</b> <i>(sec section)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<p><br>[Method]<br><a class=none><b>data</b> <i>(object section)</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 automatically generated reader method
@@ -497,6 +704,46 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for DATA -->
+
+
+<!-- Entry for DATA-PROCESSING -->
+
+<p><br>[Standard class]<br><a class=none name='data-processing'><b>data-processing</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for DATA-PROCESSING -->
+
+
+<!-- Entry for DISASSEMBLABLE -->
+
+<p><br>[Standard class]<br><a class=none name='disassemblable'><b>disassemblable</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for DISASSEMBLABLE -->
+
+
+<!-- Entry for DISASSEMBLE-SECTION -->
+
+<p><br>[Generic function]<br><a class=none name='disassemble-section'><b>disassemble-section</b> <i>disassemblable section</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Return the disassembly of the contents of SECTION in DISASSEMBLABLE.
+The contents are returned grouped by function.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for DISASSEMBLE-SECTION -->
 
 
 <!-- Entry for ELF -->
@@ -540,6 +787,45 @@ automatically generated reader method
 <!-- End of entry for ELF -->
 
 
+<!-- Entry for ELF-CONST -->
+
+<p><br>[Standard class]<br><a class=none name='elf-const'><b>elf-const</b></a>
+<blockquote><br>
+
+Disassemblable objects with caches holding disassembly by section name.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for ELF-CONST -->
+
+
+<!-- Entry for ELF-HEADER -->
+
+<p><br>[Standard class]<br><a class=none name='elf-header'><b>elf-header</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ELF-HEADER -->
+
+
+<!-- Entry for ELF-HEADER -->
+
+<p><br>[Function]<br><a class=none name='elf-header'><b>elf-header</b> <i>file</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ELF-HEADER -->
+
+
 <!-- Entry for ELF-P -->
 
 <p><br>[Function]<br><a class=none name='elf-p'><b>elf-p</b> <i>file</i> =&gt; <i>result</i></a>
@@ -553,6 +839,35 @@ Return t if file is an ELF file (using the magic number test).
 </blockquote>
 
 <!-- End of entry for ELF-P -->
+
+
+<!-- Entry for ENTRY -->
+
+<p><br>[Generic accessor]<br><a class=none name='entry'><b>entry</b> <i>object</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>entry</b> <i>object</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ENTRY -->
+
+
+<!-- Entry for ENTRY -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>entry</b> <i>(object elf-header)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>entry</b> <i>(object elf-header)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
+
+
+
+</blockquote>
+
+<!-- End of entry for ENTRY -->
 
 
 <!-- Entry for ENTSIZE -->
@@ -582,6 +897,21 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for ENTSIZE -->
+
+
+<!-- Entry for FILE-OFFSET-OF-EA -->
+
+<p><br>[Generic function]<br><a class=none name='file-offset-of-ea'><b>file-offset-of-ea</b> <i>elf ea</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Return the file offset in ELF of EA.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for FILE-OFFSET-OF-EA -->
 
 
 <!-- Entry for FILESZ -->
@@ -719,6 +1049,54 @@ automatically generated reader method
 <!-- End of entry for FLAGS -->
 
 
+<!-- Entry for FROM-BITS -->
+
+<p><br>[Generic function]<br><a class=none name='from-bits'><b>from-bits</b> <i>obj bits</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for FROM-BITS -->
+
+
+<!-- Entry for FROM-BITS -->
+
+<p><br>[Method]<br><a class=none><b>from-bits</b> <i>(obj arm-data) bits</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for FROM-BITS -->
+
+
+<!-- Entry for FROM-BYTES -->
+
+<p><br>[Generic function]<br><a class=none name='from-bytes'><b>from-bytes</b> <i>obj bytes</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for FROM-BYTES -->
+
+
+<!-- Entry for FROM-BYTES -->
+
+<p><br>[Method]<br><a class=none><b>from-bytes</b> <i>(obj arm-data) bytes</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for FROM-BYTES -->
+
+
 <!-- Entry for GENERIC-COPY -->
 
 <p><br>[Function]<br><a class=none name='generic-copy'><b>generic-copy</b> <i>obj <tt>&amp;optional</tt> trace</i> =&gt; <i>result</i></a>
@@ -761,6 +1139,30 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for HEADER -->
+
+
+<!-- Entry for INDEX-OF-EA -->
+
+<p><br>[Generic function]<br><a class=none name='index-of-ea'><b>index-of-ea</b> <i>obj ea</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for INDEX-OF-EA -->
+
+
+<!-- Entry for INDEX-OF-EA -->
+
+<p><br>[Method]<br><a class=none><b>index-of-ea</b> <i>(obj section) ea</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for INDEX-OF-EA -->
 
 
 <!-- Entry for INFO -->
@@ -888,9 +1290,48 @@ automatically generated reader method
 <!-- End of entry for INFO -->
 
 
+<!-- Entry for INSERT -->
+
+<p><br>[Generic function]<br><a class=none name='insert'><b>insert</b> <i>obj data ea</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Write DATA into OBJ at EA overwriting previous contents.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for INSERT -->
+
+
+<!-- Entry for INSTRUCTION -->
+
+<p><br>[Standard class]<br><a class=none name='instruction'><b>instruction</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for INSTRUCTION -->
+
+
+<!-- Entry for INT-TO-BITS -->
+
+<p><br>[Function]<br><a class=none name='int-to-bits'><b>int-to-bits</b> <i>byte size <tt>&amp;optional</tt> signed-p</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for INT-TO-BITS -->
+
+
 <!-- Entry for INT-TO-BYTES -->
 
-<p><br>[Function]<br><a class=none name='int-to-bytes'><b>int-to-bytes</b> <i>int size <tt>&amp;optional</tt> signed-p <tt>&amp;aux</tt> steps</i> =&gt; <i>result</i></a>
+<p><br>[Function]<br><a class=none name='int-to-bytes'><b>int-to-bytes</b> <i>int size <tt>&amp;optional</tt> signed-p byte-size <tt>&amp;aux</tt> steps</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 
@@ -898,6 +1339,30 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for INT-TO-BYTES -->
+
+
+<!-- Entry for LDM/STM -->
+
+<p><br>[Standard class]<br><a class=none name='ldm/stm'><b>ldm/stm</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for LDM/STM -->
+
+
+<!-- Entry for LDR/STR -->
+
+<p><br>[Standard class]<br><a class=none name='ldr/str'><b>ldr/str</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for LDR/STR -->
 
 
 <!-- Entry for LINK -->
@@ -956,6 +1421,66 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for MAGIC-NUMBER -->
+
+
+<!-- Entry for MAKE-ARM-BRANCH -->
+
+<p><br>[Function]<br><a class=none name='make-arm-branch'><b>make-arm-branch</b> <i>mnemonic offset</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MAKE-ARM-BRANCH -->
+
+
+<!-- Entry for MAKE-ARM-DATA-PROCESSING -->
+
+<p><br>[Function]<br><a class=none name='make-arm-data-processing'><b>make-arm-data-processing</b> <i>mnemonic register immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MAKE-ARM-DATA-PROCESSING -->
+
+
+<!-- Entry for MAKE-ARM-DATA-TRANSFER -->
+
+<p><br>[Function]<br><a class=none name='make-arm-data-transfer'><b>make-arm-data-transfer</b> <i>mnemonic reg offset</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MAKE-ARM-DATA-TRANSFER -->
+
+
+<!-- Entry for MAKE-ARM-STACK -->
+
+<p><br>[Function]<br><a class=none name='make-arm-stack'><b>make-arm-stack</b> <i>mnemonic registers</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MAKE-ARM-STACK -->
+
+
+<!-- Entry for MAKE-ARM-WORD -->
+
+<p><br>[Function]<br><a class=none name='make-arm-word'><b>make-arm-word</b> <i>immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MAKE-ARM-WORD -->
 
 
 <!-- Entry for MAPSLOTS -->
@@ -1127,7 +1652,7 @@ Return the symbol in ELF named NAME.
 
 <!-- Entry for OBJDUMP -->
 
-<p><br>[Generic function]<br><a class=none name='objdump'><b>objdump</b> <i>sec</i> =&gt; <i>result</i></a>
+<p><br>[Standard class]<br><a class=none name='objdump'><b>objdump</b></a>
 <blockquote><br>
 
 
@@ -1139,17 +1664,44 @@ Return the symbol in ELF named NAME.
 
 <!-- Entry for OBJDUMP -->
 
-<p><br>[Method]<br><a class=none><b>objdump</b> <i>(sec section)</i> =&gt; <i>result</i></a>
+<p><br>[Function]<br><a class=none name='objdump'><b>objdump</b> <i>section</i> =&gt; <i>result</i></a>
 <blockquote><br>
-
-Use objdump to return the disassembly of SEC.
-
 
 
 
 </blockquote>
 
 <!-- End of entry for OBJDUMP -->
+
+
+<!-- Entry for OBJDUMP-CMD -->
+
+<p><br>[Special variable]<br><a class=none name='objdump-cmd'><b>objdump-cmd</b></a>
+<blockquote><br>
+
+Name of the objdump executable.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OBJDUMP-CMD -->
+
+
+<!-- Entry for OBJDUMP-CONST -->
+
+<p><br>[Standard class]<br><a class=none name='objdump-const'><b>objdump-const</b></a>
+<blockquote><br>
+
+Caching objdump-backed ELF file.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OBJDUMP-CONST -->
 
 
 <!-- Entry for OBJDUMP-PARSE -->
@@ -1172,6 +1724,38 @@ Parse the output of <code>objdump</code> returning the disassembly by symbol.
 <p><br>[Generic accessor]<br><a class=none name='offset'><b>offset</b> <i>object</i> =&gt; <i>result</i></a>
 <br><a class=none><tt>(setf (</tt><b>offset</b> <i>object</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
 <blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for OFFSET -->
+
+
+<!-- Entry for OFFSET -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>offset</b> <i>(object b/bl)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>offset</b> <i>(object b/bl)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OFFSET -->
+
+
+<!-- Entry for OFFSET -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>offset</b> <i>(object ldr/str)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>offset</b> <i>(object ldr/str)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
 
 
 
@@ -1305,6 +1889,80 @@ automatically generated reader method
 <!-- End of entry for OFFSET -->
 
 
+<!-- Entry for OPCODE -->
+
+<p><br>[Generic accessor]<br><a class=none name='opcode'><b>opcode</b> <i>object</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>opcode</b> <i>object</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for OPCODE -->
+
+
+<!-- Entry for OPCODE -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>opcode</b> <i>(object instruction)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>opcode</b> <i>(object instruction)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OPCODE -->
+
+
+<!-- Entry for OPCODE -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>opcode</b> <i>(object data-processing)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>opcode</b> <i>(object data-processing)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OPCODE -->
+
+
+<!-- Entry for OPERANDS -->
+
+<p><br>[Generic accessor]<br><a class=none name='operands'><b>operands</b> <i>object</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>operands</b> <i>object</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for OPERANDS -->
+
+
+<!-- Entry for OPERANDS -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>operands</b> <i>(object instruction)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>operands</b> <i>(object instruction)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
+<blockquote><br>
+
+automatically generated reader method
+
+
+
+
+</blockquote>
+
+<!-- End of entry for OPERANDS -->
+
+
 <!-- Entry for ORDERING -->
 
 <p><br>[Generic accessor]<br><a class=none name='ordering'><b>ordering</b> <i>object</i> =&gt; <i>result</i></a>
@@ -1424,21 +2082,6 @@ automatically generated reader method
 <!-- End of entry for PADDR -->
 
 
-<!-- Entry for PARSE-ADDRESSES -->
-
-<p><br>[Function]<br><a class=none name='parse-addresses'><b>parse-addresses</b> <i>lines</i> =&gt; <i>result</i></a>
-<blockquote><br>
-
-Parse addresses from lines of objdump output.
-
-
-
-
-</blockquote>
-
-<!-- End of entry for PARSE-ADDRESSES -->
-
-
 <!-- Entry for PH -->
 
 <p><br>[Generic accessor]<br><a class=none name='ph'><b>ph</b> <i>object</i> =&gt; <i>result</i></a>
@@ -1525,7 +2168,7 @@ automatically generated reader method
 
 <!-- Entry for READ-ELF -->
 
-<p><br>[Function]<br><a class=none name='read-elf'><b>read-elf</b> <i>file</i> =&gt; <i>result</i></a>
+<p><br>[Function]<br><a class=none name='read-elf'><b>read-elf</b> <i>file <tt>&amp;optional</tt> type</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 
@@ -1537,7 +2180,7 @@ automatically generated reader method
 
 <!-- Entry for READ-VALUE -->
 
-<p><br>[Generic function]<br><a class=none name='read-value'><b>read-value</b> <i>type stream <tt>&amp;key</tt> character-type length bytes swap terminator bytes bits-per-byte</i> =&gt; <i>result</i></a>
+<p><br>[Generic function]<br><a class=none name='read-value'><b>read-value</b> <i>type stream <tt>&amp;key</tt> arm-instruction length value bytes byte-size terminator swap character-type bits-per-byte</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 Read a value of the given type from the stream.
@@ -1570,17 +2213,8 @@ Convert a symbol and type back into the info field of an elf-rel.
 <p><br>[Generic function]<br><a class=none name='rel-sym'><b>rel-sym</b> <i>rel</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
+Shift bits in REL based on its class.
 
-
-</blockquote>
-
-<!-- End of entry for REL-SYM -->
-
-
-<!-- Entry for REL-SYM -->
-
-<p><br>[Method]<br><a class=none><b>rel-sym</b> <i>(rel elf-rel)</i> =&gt; <i>result</i></a>
-<blockquote><br>
 
 
 
@@ -1594,18 +2228,6 @@ Convert a symbol and type back into the info field of an elf-rel.
 <p><br>[Generic function]<br><a class=none name='rel-type'><b>rel-type</b> <i>rel header</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
-
-</blockquote>
-
-<!-- End of entry for REL-TYPE -->
-
-
-<!-- Entry for REL-TYPE -->
-
-<p><br>[Method]<br><a class=none><b>rel-type</b> <i>(rel elf-rel) (header elf-header)</i> =&gt; <i>result</i></a>
-<blockquote><br>
-
 The interpretation of the type is machine specific.
 
 
@@ -1614,6 +2236,30 @@ The interpretation of the type is machine specific.
 </blockquote>
 
 <!-- End of entry for REL-TYPE -->
+
+
+<!-- Entry for SECTION-HOLDING-EA -->
+
+<p><br>[Function]<br><a class=none name='section-holding-ea'><b>section-holding-ea</b> <i>obj ea-start <tt>&amp;optional</tt> ea-end</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SECTION-HOLDING-EA -->
+
+
+<!-- Entry for SECTION-HOLDING-OFF -->
+
+<p><br>[Function]<br><a class=none name='section-holding-off'><b>section-holding-off</b> <i>obj off-start <tt>&amp;optional</tt> off-end</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SECTION-HOLDING-OFF -->
 
 
 <!-- Entry for SECTION-TABLE -->
@@ -1672,6 +2318,155 @@ automatically generated reader method
 </blockquote>
 
 <!-- End of entry for SECTIONS -->
+
+
+<!-- Entry for SECTIONS-HOLDING-EA -->
+
+<p><br>[Function]<br><a class=none name='sections-holding-ea'><b>sections-holding-ea</b> <i>elf ea-start <tt>&amp;optional</tt> ea-end</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SECTIONS-HOLDING-EA -->
+
+
+<!-- Entry for SECTIONS-HOLDING-OFF -->
+
+<p><br>[Function]<br><a class=none name='sections-holding-off'><b>sections-holding-off</b> <i>elf off-start <tt>&amp;optional</tt> off-end</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Return the section holding the requested file locations.
+Note, this does not return filler if the requested file location is
+just filler bytes.
+
+
+
+
+</blockquote>
+
+<!-- End of entry for SECTIONS-HOLDING-OFF -->
+
+
+<!-- Entry for SET-ARM-BRANCH -->
+
+<p><br>[Generic function]<br><a class=none name='set-arm-branch'><b>set-arm-branch</b> <i>obj mnemonic to from</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-BRANCH -->
+
+
+<!-- Entry for SET-ARM-BRANCH -->
+
+<p><br>[Method]<br><a class=none><b>set-arm-branch</b> <i>(obj elf) mnemonic to from</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-BRANCH -->
+
+
+<!-- Entry for SET-ARM-DATA-PROCESSING -->
+
+<p><br>[Generic function]<br><a class=none name='set-arm-data-processing'><b>set-arm-data-processing</b> <i>obj mnemonic place register immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-DATA-PROCESSING -->
+
+
+<!-- Entry for SET-ARM-DATA-PROCESSING -->
+
+<p><br>[Method]<br><a class=none><b>set-arm-data-processing</b> <i>(obj elf) mnemonic place register immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-DATA-PROCESSING -->
+
+
+<!-- Entry for SET-ARM-DATA-TRANSFER -->
+
+<p><br>[Generic function]<br><a class=none name='set-arm-data-transfer'><b>set-arm-data-transfer</b> <i>obj mnemonic place reg from</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-DATA-TRANSFER -->
+
+
+<!-- Entry for SET-ARM-DATA-TRANSFER -->
+
+<p><br>[Method]<br><a class=none><b>set-arm-data-transfer</b> <i>(obj elf) mnemonic place reg from</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-DATA-TRANSFER -->
+
+
+<!-- Entry for SET-ARM-STACK -->
+
+<p><br>[Generic function]<br><a class=none name='set-arm-stack'><b>set-arm-stack</b> <i>obj mnemonic place registers</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-STACK -->
+
+
+<!-- Entry for SET-ARM-STACK -->
+
+<p><br>[Method]<br><a class=none><b>set-arm-stack</b> <i>(obj elf) mnemonic place registers</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-STACK -->
+
+
+<!-- Entry for SET-ARM-WORD -->
+
+<p><br>[Generic function]<br><a class=none name='set-arm-word'><b>set-arm-word</b> <i>obj place immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-WORD -->
+
+
+<!-- Entry for SET-ARM-WORD -->
+
+<p><br>[Method]<br><a class=none><b>set-arm-word</b> <i>(obj elf) place immediate</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SET-ARM-WORD -->
 
 
 <!-- Entry for SH -->
@@ -1882,6 +2677,84 @@ automatically generated reader method
 <!-- End of entry for SIZE -->
 
 
+<!-- Entry for SUBSEQ-EA -->
+
+<p><br>[Generic accessor]<br><a class=none name='subseq-ea'><b>subseq-ea</b> <i>obj ea-start <tt>&amp;optional</tt> ea-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-ea</b> <i>obj ea-start <tt>&amp;optional</tt> ea-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-EA -->
+
+
+<!-- Entry for SUBSEQ-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>subseq-ea</b> <i>(obj section) ea-start <tt>&amp;optional</tt> ea-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-ea</b> <i>(obj section) ea-start <tt>&amp;optional</tt> ea-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-EA -->
+
+
+<!-- Entry for SUBSEQ-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>subseq-ea</b> <i>(obj elf) ea-start <tt>&amp;optional</tt> ea-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-ea</b> <i>(obj elf) ea-start <tt>&amp;optional</tt> ea-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-EA -->
+
+
+<!-- Entry for SUBSEQ-OFF -->
+
+<p><br>[Generic accessor]<br><a class=none name='subseq-off'><b>subseq-off</b> <i>obj off-start <tt>&amp;optional</tt> off-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-off</b> <i>obj off-start <tt>&amp;optional</tt> off-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-OFF -->
+
+
+<!-- Entry for SUBSEQ-OFF -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>subseq-off</b> <i>(obj section) off-start <tt>&amp;optional</tt> off-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-off</b> <i>(obj section) off-start <tt>&amp;optional</tt> off-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-OFF -->
+
+
+<!-- Entry for SUBSEQ-OFF -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>subseq-off</b> <i>(obj elf) off-start <tt>&amp;optional</tt> off-end</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>subseq-off</b> <i>(obj elf) off-start <tt>&amp;optional</tt> off-end</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SUBSEQ-OFF -->
+
+
 <!-- Entry for SYM-NAME -->
 
 <p><br>[Generic accessor]<br><a class=none name='sym-name'><b>sym-name</b> <i>object</i> =&gt; <i>result</i></a>
@@ -1916,18 +2789,6 @@ automatically generated reader method
 <p><br>[Generic function]<br><a class=none name='symbols'><b>symbols</b> <i>elf</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
-
-</blockquote>
-
-<!-- End of entry for SYMBOLS -->
-
-
-<!-- Entry for SYMBOLS -->
-
-<p><br>[Method]<br><a class=none><b>symbols</b> <i>(elf elf)</i> =&gt; <i>result</i></a>
-<blockquote><br>
-
 Return the symbols contained in ELF.
 
 
@@ -1936,6 +2797,54 @@ Return the symbols contained in ELF.
 </blockquote>
 
 <!-- End of entry for SYMBOLS -->
+
+
+<!-- Entry for TO-BITS -->
+
+<p><br>[Generic function]<br><a class=none name='to-bits'><b>to-bits</b> <i>obj</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for TO-BITS -->
+
+
+<!-- Entry for TO-BITS -->
+
+<p><br>[Method]<br><a class=none><b>to-bits</b> <i>(obj arm-data)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for TO-BITS -->
+
+
+<!-- Entry for TO-BYTES -->
+
+<p><br>[Generic function]<br><a class=none name='to-bytes'><b>to-bytes</b> <i>obj</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for TO-BYTES -->
+
+
+<!-- Entry for TO-BYTES -->
+
+<p><br>[Method]<br><a class=none><b>to-bytes</b> <i>(obj arm-data)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for TO-BYTES -->
 
 
 <!-- Entry for TYPE -->
@@ -1966,7 +2875,8 @@ Return the symbols contained in ELF.
 
 <!-- Entry for TYPE -->
 
-<p><br>[Method]<br><a class=none><b>type</b> <i>(object elf-sym)</i> =&gt; <i>result</i></a>
+<p><br>[Specialized accessor]<br><a class=none><b>type</b> <i>(object elf-sym)</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>type</b> <i>(object elf-sym)</i><tt>)</tt> <i>new-value</i><tt>)</tt></a>
 <blockquote><br>
 
 
@@ -2182,9 +3092,12 @@ automatically generated reader method
 
 <!-- Entry for VMA -->
 
-<p><br>[Generic accessor]<br><a class=none name='vma'><b>vma</b> <i>sec</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>vma</b> <i>sec</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<p><br>[Generic accessor]<br><a class=none name='vma'><b>vma</b> <i>section</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>vma</b> <i>section</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
+
+Return the virtual memory address for SECTION.
+
 
 
 
@@ -2193,17 +3106,82 @@ automatically generated reader method
 <!-- End of entry for VMA -->
 
 
-<!-- Entry for VMA -->
+<!-- Entry for WORD-AT-EA -->
 
-<p><br>[Specialized accessor]<br><a class=none><b>vma</b> <i>(sec section)</i> =&gt; <i>result</i></a>
-<br><a class=none><tt>(setf (</tt><b>vma</b> <i>(sec section)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<p><br>[Generic accessor]<br><a class=none name='word-at-ea'><b>word-at-ea</b> <i>obj ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-ea</b> <i>obj ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
 <blockquote><br>
 
 
 
 </blockquote>
 
-<!-- End of entry for VMA -->
+<!-- End of entry for WORD-AT-EA -->
+
+
+<!-- Entry for WORD-AT-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>word-at-ea</b> <i>(obj elf) ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-ea</b> <i>(obj elf) ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for WORD-AT-EA -->
+
+
+<!-- Entry for WORD-AT-EA -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>word-at-ea</b> <i>(obj section) ea</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-ea</b> <i>(obj section) ea</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for WORD-AT-EA -->
+
+
+<!-- Entry for WORD-AT-OFF -->
+
+<p><br>[Generic accessor]<br><a class=none name='word-at-off'><b>word-at-off</b> <i>obj off</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-off</b> <i>obj off</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for WORD-AT-OFF -->
+
+
+<!-- Entry for WORD-AT-OFF -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>word-at-off</b> <i>(obj elf) off</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-off</b> <i>(obj elf) off</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for WORD-AT-OFF -->
+
+
+<!-- Entry for WORD-AT-OFF -->
+
+<p><br>[Specialized accessor]<br><a class=none><b>word-at-off</b> <i>(obj section) off</i> =&gt; <i>result</i></a>
+<br><a class=none><tt>(setf (</tt><b>word-at-off</b> <i>(obj section) off</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for WORD-AT-OFF -->
 
 
 <!-- Entry for WRITE-ELF -->
@@ -2220,7 +3198,7 @@ automatically generated reader method
 
 <!-- Entry for WRITE-VALUE -->
 
-<p><br>[Generic function]<br><a class=none name='write-value'><b>write-value</b> <i>type stream value <tt>&amp;key</tt> character-type length bytes swap terminator bytes bits-per-byte</i> =&gt; <i>result</i></a>
+<p><br>[Generic function]<br><a class=none name='write-value'><b>write-value</b> <i>type stream value <tt>&amp;key</tt> arm-instruction length value bytes byte-size terminator swap character-type bits-per-byte</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 Write a value as the given type to the stream.
@@ -2231,6 +3209,18 @@ Write a value as the given type to the stream.
 </blockquote>
 
 <!-- End of entry for WRITE-VALUE -->
+
+
+<!-- Entry for (SETF VMA) -->
+
+<p><br>[Method]<br><a class=none><tt>(setf (</tt><b>vma</b> <i>(section section)</i><tt>)</tt> <i>new</i><tt>)</tt></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for (SETF VMA) -->
 
 
 <br>&nbsp;<br><h3><a class=none name="ack">Acknowledgements</a></h3>
