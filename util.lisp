@@ -14,6 +14,11 @@
   (loop for el in sequence as n from 0
      collect (list n el)))
 
+(defun chunks (list size)
+  "Return subsequent chunks of LIST of size SIZE."
+  (loop :for i :below (1+ (- (length list) size)) :by size :collect
+     (subseq list i (+ i size))))
+
 #+sbcl
 (locally (declare (sb-ext:muffle-conditions sb-ext:compiler-note))
   (sb-alien:define-alien-routine (#-win32 "tempnam" #+win32 "_tempnam" tempnam)
@@ -30,8 +35,40 @@
   (tempnam nil nil)
   #+ccl
   (ccl:temp-pathname)
-  #-(or sbcl clisp ccl)
+  #+allegro
+  (system:make-temp-file-name)
+  #-(or sbcl clisp ccl allegro)
   (error "no temporary file backend for this lisp."))
+
+(defmacro with-temp-file (file &rest body)
+  "SPEC is the variable used to reference the file w/optional extension.
+After BODY is executed the temporary file is removed."
+  `(let ((,file (temp-file-name)))
+     (unwind-protect (progn ,@body)
+       (when (probe-file ,file) (delete-file ,file)))))
+
+(defun file-to-string (path)
+  (with-open-file (in path)
+    (let ((seq (make-string (file-length in))))
+      (read-sequence seq in)
+      seq)))
+
+(defun shell (command)
+  #+ecl          (ext:system command)
+  #+ccl          (with-temp-file stdout-file
+                   (with-temp-file stderr-file
+                     (multiple-value-bind (stdout stderr errno)
+                         ;; Workaround Clozure bug with large outputs
+                         ;; by writing stdout/stderr to file and slurping
+                         ;; the file back up to return.
+                         (shell-command (format nil "~a 1>~a 2>~a"
+                                                command
+                                                stdout-file stderr-file))
+                       (declare (ignorable stdout stderr))
+                       (values (file-to-string stdout-file)
+                               (file-to-string stderr-file)
+                               errno))))
+  #-(or ccl ecl) (shell-command command))
 
 (defun trim (str &key (chars '(#\Space #\Tab #\Newline)))
   (loop until (or (emptyp str) (not (member (aref str 0) chars)))
