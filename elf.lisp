@@ -1,11 +1,9 @@
 ;;; elf.lisp --- A Common Lisp library for manipulating ELF files
 
 ;; Copyright (C) 2011-2013  Eric Schulte
-
 ;; Licensed under the Gnu Public License Version 3 or later
 
 ;;; Commentary
-
 ;; See [ELF.txt](ELF.txt) for more information on the elf format.
 ;; Much of the code in `elf.lisp` is a direct translation of the elf
 ;; data structures described in the ELF.txt document augmented with
@@ -836,6 +834,12 @@
    (name :initarg :name :accessor name)
    (data :initarg :data :reader data :writer set-data)))
 
+(defmethod print-object ((section section) stream)
+  (print-unreadable-object (section stream :type t)
+    (with-slots (name) section
+      (format stream "~S" name)))
+  section)
+
 (defmethod offset ((sec section))
   (offset (or (sh sec) (ph sec))))
 
@@ -1306,7 +1310,7 @@ Note: the output should resemble the output of readelf -r."
             (let ((syms (symbols elf)))
               (format t sec-f name (offset sh) (length data))
               (format t rel-h)
-              (mapcar
+              (mapc
                (lambda (rel) ;; offset info type sym.name
                  (format t rel-f
                          (offset rel)
@@ -1351,28 +1355,29 @@ Note: the output should resemble the output of readelf -r."
                          (if (string= ".dynstr" (name tab)) dynstr strtab)
                          (name sym)))))))))
 
+(defun list-file-layout (elf)
+  (mapcar (lambda-bind ((offset size data))
+                       (list offset
+                             ;; an identifier for the section data
+                             (cond
+                               ((numberp data) (name (nth data (sections elf))))
+                               ((stringp data) data)
+                               ((vectorp data) :filler)
+                               (t data))
+                             ;; the size in the file
+                             (let ((sec (cond
+                                          ((numberp data)(nth data (sections elf)))
+                                          ((stringp data) (named-section elf data))
+                                          (t nil))))
+                               (+ offset (if (and sec (equal :nobits (type sec)))
+                                             0
+                                             size)))))
+          (ordering elf)))
+
 (defun show-file-layout (elf)
   "Show the layout of the elements of an elf file with binary offset."
-  (let ((layout
-         (mapcar (lambda-bind ((offset size data))
-                   (list offset
-                         ;; an identifier for the section data
-                         (cond
-                           ((numberp data) (name (nth data (sections elf))))
-                           ((stringp data) data)
-                           ((vectorp data) :filler)
-                           (t data))
-                         ;; the size in the file
-                         (let ((sec (cond
-                                      ((numberp data)(nth data (sections elf)))
-                                      ((stringp data) (named-section elf data))
-                                      (t nil))))
-                           (+ offset (if (and sec (equal :nobits (type sec)))
-                                         0
-                                         size)))))
-                 (ordering elf))))
-    (format t "~:{~&~8a ~18a ~8a~}~%" (cons (list 'offset 'contents 'end)
-                                            layout))))
+  (format t "~:{~&~8a ~18a ~8a~}~%" (cons (list 'offset 'contents 'end)
+                                          (list-file-layout elf))))
 
 (defun memory-sorted-sections (elf)
   "Return the sections of the ELF file sorted by their order in memory.
@@ -1387,7 +1392,7 @@ Each element of the resulting list is a triplet of (offset size header)."
                    (list (vaddr head) (memsz head) head)))
                program-table)
        (when section-table
-         (mapcar (lambda (sec) 
+         (mapcar (lambda (sec)
                    (when (or (not (zerop (address (sh sec))))
                              (and (zerop (address (sh sec)))
                                   (member (flags (sh sec))
@@ -1397,22 +1402,26 @@ Each element of the resulting list is a triplet of (offset size header)."
                  sections))))
      #'< :key #'car)))
 
+(defun list-memory-layout (elf)
+  (mapcar
+   (lambda (trio)
+     (bind (((beg size header) trio))
+       (list beg
+             (cond
+               ((subtypep (type-of header) (program-header-type))
+                (type header))
+               ((subtypep (type-of header) 'section)
+                (name header)))
+             (+ beg size))))
+   (memory-sorted-sections elf)))
+
 (defun show-memory-layout (elf)
   "Show the layout of the elements of an elf file with binary offset."
   (format t "~&addr     contents          end     ~%")
   (format t "-------------------------------------~%")
-  (mapc
-   (lambda (trio)
-     (bind (((beg size header) trio))
-       (format t "~&0x~x ~18a 0x~x~%"
-               beg
-               (cond
-                 ((subtypep (type-of header) (program-header-type))
-                  (type header))
-                 ((subtypep (type-of header) 'section)
-                  (name header)))
-               (+ beg size))))
-   (memory-sorted-sections elf))
+  (mapc (lambda-bind ((addr contents end))
+                     (format t "~&0x~6,'0x ~18a 0x~6,'0x~%" addr contents end))
+        (list-memory-layout elf))
   nil)
 
 (defgeneric file-offset-of-ea (elf ea)

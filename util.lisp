@@ -138,6 +138,10 @@ Optional argument OUT specifies an output stream."
        (list slot val)))
    (mapcar #'my-slot-definition-name (my-class-slots (class-of hd)))))
 
+(defun list-it (hd)
+  "Return the fields of an elf, section, or program header."
+  (show-it hd :out nil))
+
 (defun equal-it (obj1 obj2 &optional trace)
   "Equal over objects and lists."
   (let ((trace1 (concatenate 'list (list obj1 obj2) trace)))
