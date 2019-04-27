@@ -10,7 +10,8 @@
                split-sequence
                #-ecl trivial-shell
                cl-ppcre
-               flexi-streams)
+               flexi-streams
+               #+sbcl sb-capstone)
   :components ((:file "package")
                (:file "util" :depends-on ("package"))
                (:file "elf" :depends-on ("package" "util"))

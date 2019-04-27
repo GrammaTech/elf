@@ -4,6 +4,9 @@
 ;;; Disassembly classes and functions
 (defclass disassemblable (elf) ())
 
+#+sbcl
+(defclass capstone (disassemblable) ())
+
 (defclass objdump (disassemblable) ())
 
 (defclass csurf (disassemblable)
@@ -149,3 +152,127 @@ Where `machine' is the elf header field.")
   (with-open-stream (instrs (decode (named-section elf section-name)))
     (loop :for line = (read-line instrs nil :eof t) :until (eq line :eof)
        :collect (from-string (make-instance 'tsl-instruction) line))))
+
+
+;;; Disassembly functions using SB-CAPSTONE (assuming X86-64)
+
+#+sbcl
+(defun copy-c-string (src dest &aux (index 0))
+  (loop (let ((b (sb-sys:sap-ref-8 src index)))
+          (when (= b 0)
+            (setf (fill-pointer dest) index)
+            (return))
+          (setf (char dest index) (code-char b))
+          (incf index))))
+
+#+sbcl
+(defun c-bytes (sap size)
+  (let ((s (make-array size :element-type '(unsigned-byte 8))))
+    (dotimes (i size)
+      (setf (aref s i)
+            (sb-sys:sap-ref-8 sap i)))
+    s))
+
+#+sbcl
+(defun parse-capstone-operand (string &aux p)
+  (cond ((starts-with-subseq "0x" string)
+         (parse-integer string :radix 16 :start 2))
+        ((starts-with-subseq "[" string)
+         (list :deref (parse-capstone-operand (subseq string 1 (1- (length string))))))
+        ((starts-with-subseq "byte ptr " string)
+         (list :byte (parse-capstone-operand (subseq string 9))))
+        ((starts-with-subseq "word ptr " string)
+         (list :word (parse-capstone-operand (subseq string 9))))
+        ((starts-with-subseq "dword ptr " string)
+         (list :dword (parse-capstone-operand (subseq string 10))))
+        ((starts-with-subseq "qword ptr " string)
+         (list :qword (parse-capstone-operand (subseq string 10))))
+        ((starts-with-subseq "tbyte ptr " string)
+         (list :tbyte (parse-capstone-operand (subseq string 10))))
+        ((starts-with-subseq "cs:" string)
+         (list (list :seg :cs) (parse-capstone-operand (subseq string 3))))
+        ((starts-with-subseq "ds:" string)
+         (list (list :seg :ds) (parse-capstone-operand (subseq string 3))))
+        ((starts-with-subseq "es:" string)
+         (list (list :seg :es) (parse-capstone-operand (subseq string 3))))
+        ((starts-with-subseq "fs:" string)
+         (list (list :seg :fs) (parse-capstone-operand (subseq string 3))))
+        ((starts-with-subseq "gs:" string)
+         (list (list :seg :gs) (parse-capstone-operand (subseq string 3))))
+        ((setq p (search " + " string))
+         (list :+
+               (parse-capstone-operand (subseq string 0 p))
+               (parse-capstone-operand (subseq string (+ p 3)))))
+        ((setq p (search " - " string))
+         (list :-
+               (parse-capstone-operand (subseq string 0 p))
+               (parse-capstone-operand (subseq string (+ p 3)))))
+        ((setq p (search "*" string))
+         (list :*
+               (parse-capstone-operand (subseq string 0 p))
+               (parse-capstone-operand (subseq string (1+ p)))))
+        ((every #'digit-char-p string)
+         (parse-integer string))
+        (t
+         (make-keyword (string-upcase string)))))
+
+#+sbcl
+(defun parse-capstone-operands (operands)
+  (if (equal operands "")
+      nil
+      (mapcar (lambda (s) (parse-capstone-operand (string-trim " " s)))
+              (split-sequence:split-sequence #\, operands))))
+
+#+sbcl
+(defun capstone-disassemble-bytes (bytes size)
+  (let ((instructions '()))
+    (sb-sys:with-pinned-objects (bytes)
+      (let* ((base (sb-sys:vector-sap bytes))
+             (target '(:x86-64 :little-endian))
+             (insn-addr (sb-sys:sap-int base))
+             (starting-vaddr 0))
+        (multiple-value-bind (return-code handle)
+            (sb-capstone:cs-open-for-target target)
+          (declare (ignore return-code))
+          (sb-capstone:cs-option handle sb-capstone:cs-opt-detail sb-capstone:cs-opt-on)
+          (let ((insn (sb-capstone:cs-malloc handle))
+                (mnemonic (make-array 31 :element-type 'base-char :fill-pointer t))
+                (operands (make-array 159 :element-type 'base-char :fill-pointer t)))
+            (sb-alien:with-alien ((paddr sb-alien:unsigned)
+                                  (vaddr sb-alien:unsigned)
+                                  (remaining sb-alien:unsigned))
+              (setq paddr insn-addr
+                    vaddr starting-vaddr
+                    remaining size)
+              (loop
+               (multiple-value-bind (successful new-paddr new-remaining new-vaddr)
+                   (sb-capstone:cs-disasm-iter handle paddr remaining vaddr insn)
+                 (setf paddr new-paddr
+                       remaining new-remaining
+                       vaddr new-vaddr)
+                 (unless successful
+                   (return))
+                 (copy-c-string
+                  (sb-alien:alien-sap (sb-alien:slot insn 'sb-capstone:insn-mnemonic))
+                  mnemonic)
+                 (copy-c-string
+                  (sb-alien:alien-sap (sb-alien:slot insn 'sb-capstone:insn-operands))
+                  operands)
+                 (push
+                  (list
+                   (c-bytes
+                    (sb-alien:alien-sap (sb-alien:slot insn 'sb-capstone:insn-bytes))
+                    (sb-alien:slot insn 'sb-capstone:insn-size))
+                   (list*
+                    (make-keyword (string-upcase mnemonic))
+                    (parse-capstone-operands operands)))
+                  instructions))))
+            (sb-capstone:cs-free insn 1)
+            (sb-capstone:cs-close handle)))))
+    (nreverse instructions)))
+
+#+sbcl
+(defmethod disassemble-section ((elf capstone) section-name)
+  (let ((section (named-section elf section-name)))
+    (capstone-disassemble-bytes (data section)
+                                (length (data section)))))
