@@ -43,7 +43,7 @@
    ;; disassembly functionality
    :disassemblable :objdump :csurf :sw-project :disassemble-section
    :elf-const :objdump-const
-   :objdump-cmd :objdump :parse-addresses :objdump-parse
+   :objdump-cmd :objdump :parse-objdump-line :objdump-parse
    :*single-value-objdump-hack*
    :csurf-cmd
    :csurf-script

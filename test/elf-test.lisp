@@ -114,7 +114,7 @@
                                (loop for line = (read-line in nil :eof)
                                   until (eq line :eof)
                                   collect line))))
-    (is (elf::equal-it '(0) (second (nth 12 (parse-addresses lines)))))))
+    (is (elf::equal-it '(0) (second (nth 12 (parse-objdump-line lines)))))))
 
 (deftest test-equality-of-data-and-objdump-bytes ()
   (with-fixture hello-elf
