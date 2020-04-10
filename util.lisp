@@ -37,12 +37,16 @@
   (ccl:temp-pathname)
   #+allegro
   (system:make-temp-file-name)
-  #-(or sbcl clisp ccl allegro)
+  #+lispworks
+  (hcl:make-temp-file)
+  #-(or sbcl clisp ccl allegro lispworks)
   (error "no temporary file backend for this lisp."))
 
 (defmacro with-temp-file (file &rest body)
   "SPEC is the variable used to reference the file w/optional extension.
-After BODY is executed the temporary file is removed."
+After BODY is executed the temporary file is removed.  Note that the
+temporary file may have been created by `temp-file-name', so it should
+be removed or overwritten in BODY if necessary."
   `(let ((,file (temp-file-name)))
      (unwind-protect (progn ,@body)
        (when (probe-file ,file) (delete-file ,file)))))

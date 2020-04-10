@@ -1288,7 +1288,8 @@ section (in the file)."
     (read-value type in)))
 
 (defun write-elf (elf file)
-  (with-open-file (out file :direction :output :element-type '(unsigned-byte 8))
+  (with-open-file (out file :direction :output :element-type '(unsigned-byte 8)
+                       :if-exists :supersede)
     (write-value 'elf out elf))
   nil)
 
