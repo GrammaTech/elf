@@ -16,13 +16,17 @@
 (defvar *tmp-file* nil "temporary file used for testing")
 (defvar *elf* nil "variable to hold elf object")
 
+(defun elf-test-relative-path (rel-path-string)
+  (asdf/system:system-relative-pathname
+   "elf/test" (concatenate 'string "test/" rel-path-string)))
+
 (defixture hello-elf
   (:setup
-   (setf *tmp-file* "./hello.tmp")
+   (setf *tmp-file* (elf-test-relative-path "hello.tmp"))
    (when (probe-file *tmp-file*) (delete-file *tmp-file*))
    (setf *elf* (read-elf (case *test-class*
-                           (:32-bit "hello32")
-                           (:64-bit "hello64")))))
+                           (:32-bit (elf-test-relative-path "hello32"))
+                           (:64-bit (elf-test-relative-path "hello64"))))))
   (:teardown
    (when (probe-file *tmp-file*)
      (delete-file *tmp-file*))))
@@ -110,10 +114,10 @@
        (objdump-parse (objdump (named-section *elf* ".text")))))))
 
 (deftest test-objdump-parse-empty-instructions ()
-  (let ((lines (with-open-file (in "main.txt")
-                               (loop for line = (read-line in nil :eof)
-                                  until (eq line :eof)
-                                  collect line))))
+  (let ((lines (with-open-file (in (elf-test-relative-path "main.txt"))
+                 (loop for line = (read-line in nil :eof)
+                    until (eq line :eof)
+                    collect line))))
     (is (elf::equal-it '(0) (second (nth 12 (parse-objdump-line lines)))))))
 
 (deftest test-equality-of-data-and-objdump-bytes ()
