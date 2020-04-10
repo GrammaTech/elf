@@ -17,7 +17,9 @@
                (:file "arm" :depends-on ("package" "util" "elf"))
                (:file "instruction" :depends-on ("package"))
                (:file "disassemblable"
-                      :depends-on ("package" "util" "elf" "instruction"))))
+                      :depends-on ("package" "util" "elf" "instruction")))
+  :in-order-to ((test-op (load-op "elf/test")))
+  :perform (test-op (o c) (symbol-call :elf/test '#:test)))
 
 (defsystem "elf/test"
   :description "Test the elf library."
