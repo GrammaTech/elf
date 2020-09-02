@@ -1285,7 +1285,7 @@ On an existing file stream this does not change the file-position of the stream.
       (get-endianness s)))
   (:method ((in file-stream))
     (when (< (file-length in) 6)
-      (error "File associated with ~a is too short to be an ELF file"))
+      (error "File associated with ~a is too short to be an ELF file" in))
     (let ((initial-pos (file-position in)))
       (unwind-protect
            (progn
