@@ -17,7 +17,10 @@
                (:file "elf" :depends-on ("package" "util"))
                (:file "arm" :depends-on ("package" "util" "elf"))
                (:file "instruction" :depends-on ("package"))
-               (:file "disassemblable"
+               (:file #.(if (handler-case (progn (require :sb-capstone) t)
+                              (error () nil))
+                            "disassemblable"
+                            "disassemblable-light")
                       :depends-on ("package" "util" "elf" "instruction")))
   :in-order-to ((test-op (load-op "elf/test")))
   :perform (test-op (o c) (symbol-call :elf/test '#:test)))
