@@ -4,14 +4,24 @@
   :author "Eric Schulte <schulte.eric@gmail.com>"
   :description "Common Lisp library for manipulation of ELF files."
   :version "0.1"
-  :depends-on (alexandria
-               com.gigamonkeys.binary-data
-               metabang-bind
-               split-sequence
-               #-ecl trivial-shell
-               cl-ppcre
-               flexi-streams
-               #+sbcl sb-capstone)
+  :depends-on
+  #.(if (handler-case (progn (require :sb-capstone) t)
+          (error () nil))
+        '(alexandria
+          com.gigamonkeys.binary-data
+          metabang-bind
+          split-sequence
+          #-ecl trivial-shell
+          cl-ppcre
+          flexi-streams
+          #+sbcl sb-capstone)
+        '(alexandria
+          com.gigamonkeys.binary-data
+          metabang-bind
+          split-sequence
+          #-ecl trivial-shell
+          cl-ppcre
+          flexi-streams))
   :components ((:file "package")
                (:file "util" :depends-on ("package"))
                (:file "elf" :depends-on ("package" "util"))
