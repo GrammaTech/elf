@@ -23,10 +23,10 @@
    :bytes-to-int :int-to-bytes
    :bits-to-int  :int-to-bits
    :named-section :elf-p :elf-header
-   :get-endianness
    :read-elf :write-elf
    :show-dynamic :show-symbols :show-file-layout :show-memory-layout
-   :mapslots :generic-copy :copy-elf :named-symbol :symbols
+   :mapslots :generic-copy :copy-elf :named-symbol :symbols :dyn-symbols
+   :all-symbols
    :file-offset-of-ea
    ;; Modification functions
    :index-of-ea
@@ -44,7 +44,7 @@
    ;; disassembly functionality
    :disassemblable :objdump :csurf :sw-project :disassemble-section
    :elf-const :objdump-const
-   :objdump-cmd :objdump :parse-objdump-line :objdump-parse
+   :objdump-cmd :objdump :parse-addresses :objdump-parse
    :*single-value-objdump-hack*
    :csurf-cmd
    :csurf-script
