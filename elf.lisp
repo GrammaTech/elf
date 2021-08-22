@@ -1479,7 +1479,6 @@ Each element of the resulting list is a triplet of (offset size header)."
         (list-memory-layout elf))
   nil)
 
-
 (defgeneric file-offset-of-ea (elf ea)
   (:documentation "Return the file offset in ELF of EA."))
 
