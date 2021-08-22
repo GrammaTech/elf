@@ -846,6 +846,12 @@
    (name :initarg :name :accessor name)
    (data :initarg :data :reader data :writer set-data)))
 
+(defmethod print-object ((section section) stream)
+  (print-unreadable-object (section stream :type t)
+    (with-slots (name) section
+      (format stream "~S" name)))
+  section)
+
 (defmethod offset ((sec section))
   (offset (or (sh sec) (ph sec))))
 
@@ -1306,6 +1312,32 @@ section (in the file)."
           *endian* (data-encoding header)))
   header)
 
+(defgeneric get-endianness (in)
+  (:documentation "Read the endianness byte of a file and set *ENDIAN* appropriately.
+On an existing file stream this does not change the file-position of the stream.")
+  (:method ((in pathname))
+    (with-open-file (s in :direction :input :element-type '(unsigned-byte 8))
+      (get-endianness s)))
+  (:method ((in string))
+    (with-open-file (s in :direction :input :element-type '(unsigned-byte 8))
+      (get-endianness s)))
+  (:method ((in file-stream))
+    (when (< (file-length in) 6)
+      (error "File associated with ~a is too short to be an ELF file" in))
+    (let ((initial-pos (file-position in)))
+      (unwind-protect
+           (progn
+             (file-position in 5)
+             (let ((b (read-byte in 5)))
+               (case b
+                 ;; https://www.amazon.com/Little-Big-John-Crowley/dp/0061120057
+                 (1 (setf *endian* :little))
+                 (2 (setf *endian* :big))
+                 (t (error "Endian byte of ~a is ~a; should be 1 or 2"
+                           in b)))))
+        (file-position in initial-pos))
+      *endian*)))
+
 (defun elf-header (file)
   (with-open-file (in file :element-type '(unsigned-byte 8))
     (elf-header-endianness-warn (read-value 'elf-header in))))
@@ -1315,7 +1347,8 @@ section (in the file)."
     (read-value type in)))
 
 (defun write-elf (elf file)
-  (with-open-file (out file :direction :output :element-type '(unsigned-byte 8))
+  (with-open-file (out file :direction :output :element-type '(unsigned-byte 8)
+                       :if-exists :supersede)
     (write-value 'elf out elf))
   nil)
 
@@ -1332,7 +1365,7 @@ Note: the output should resemble the output of readelf -r."
             (let ((syms (symbols elf)))
               (format t sec-f name (offset sh) (length data))
               (format t rel-h)
-              (mapcar
+              (mapc
                (lambda (rel) ;; offset info type sym.name
                  (format t rel-f
                          (offset rel)
@@ -1377,28 +1410,29 @@ Note: the output should resemble the output of readelf -r."
                          (if (string= ".dynstr" (name tab)) dynstr strtab)
                          (name sym)))))))))
 
+(defun list-file-layout (elf)
+  (mapcar (lambda-bind ((offset size data))
+                       (list offset
+                             ;; an identifier for the section data
+                             (cond
+                               ((numberp data) (name (nth data (sections elf))))
+                               ((stringp data) data)
+                               ((vectorp data) :filler)
+                               (t data))
+                             ;; the size in the file
+                             (let ((sec (cond
+                                          ((numberp data)(nth data (sections elf)))
+                                          ((stringp data) (named-section elf data))
+                                          (t nil))))
+                               (+ offset (if (and sec (equal :nobits (type sec)))
+                                             0
+                                             size)))))
+          (ordering elf)))
+
 (defun show-file-layout (elf)
   "Show the layout of the elements of an elf file with binary offset."
-  (let ((layout
-         (mapcar (lambda-bind ((offset size data))
-                   (list offset
-                         ;; an identifier for the section data
-                         (cond
-                           ((numberp data) (name (nth data (sections elf))))
-                           ((stringp data) data)
-                           ((vectorp data) :filler)
-                           (t data))
-                         ;; the size in the file
-                         (let ((sec (cond
-                                      ((numberp data)(nth data (sections elf)))
-                                      ((stringp data) (named-section elf data))
-                                      (t nil))))
-                           (+ offset (if (and sec (equal :nobits (type sec)))
-                                         0
-                                         size)))))
-                 (ordering elf))))
-    (format t "~:{~&~8a ~18a ~8a~}~%" (cons (list 'offset 'contents 'end)
-                                            layout))))
+  (format t "~:{~&~8a ~18a ~8a~}~%" (cons (list 'offset 'contents 'end)
+                                          (list-file-layout elf))))
 
 (defun memory-sorted-sections (elf)
   "Return the sections of the ELF file sorted by their order in memory.
@@ -1413,7 +1447,7 @@ Each element of the resulting list is a triplet of (offset size header)."
                    (list (vaddr head) (memsz head) head)))
                program-table)
        (when section-table
-         (mapcar (lambda (sec) 
+         (mapcar (lambda (sec)
                    (when (or (not (zerop (address (sh sec))))
                              (and (zerop (address (sh sec)))
                                   (member (flags (sh sec))
@@ -1423,23 +1457,27 @@ Each element of the resulting list is a triplet of (offset size header)."
                  sections))))
      #'< :key #'car)))
 
+(defun list-memory-layout (elf)
+  (mapcar
+   (lambda (trio)
+     (bind (((beg size header) trio))
+       (list beg
+             (cond
+               ((subtypep (type-of header) (program-header-type))
+                (type header))
+               ((subtypep (type-of header) 'section)
+                (name header)))
+             (+ beg size))))
+   (memory-sorted-sections elf)))
+
 (defun show-memory-layout (elf)
   "Show the layout of the elements of an elf file with binary offset."
   (format t "~&addr     contents          end     ~%")
   (format t "-------------------------------------~%")
-  (mapc
-   (lambda (trio)
-     (bind (((beg size header) trio))
-       (format t "~&0x~x ~18a 0x~x~%"
-               beg
-               (cond
-                 ((subtypep (type-of header) (program-header-type))
-                  (type header))
-                 ((subtypep (type-of header) 'section)
-                  (name header)))
-               (+ beg size))))
-   (memory-sorted-sections elf))
-  nil)
+  (mapc (lambda-bind ((addr contents end))
+                     (format t "~&0x~6,'0x ~18a 0x~6,'0x~%" addr contents end))
+        (list-memory-layout elf)))
+
 
 (defgeneric file-offset-of-ea (elf ea)
   (:documentation "Return the file offset in ELF of EA."))
