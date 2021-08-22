@@ -1303,15 +1303,6 @@ section (in the file)."
     (car (member (coerce (read-value 'string in :length 4) 'list)
                  elf-magic-numbers :test #'equalp))))
 
-(defun elf-header-endianness-warn (header)
-  "Raise a warning if HEADER was read using the wrong endianness."
-  (when (if (eq *endian* :little)
-            (= (data-encoding header) 2)
-            (= (data-encoding header) 1))
-    (warn "Header read with wrong encoding ~S while data-encoding ~S."
-          *endian* (data-encoding header)))
-  header)
-
 (defgeneric get-endianness (in)
   (:documentation "Read the endianness byte of a file and set *ENDIAN* appropriately.
 On an existing file stream this does not change the file-position of the stream.")
@@ -1337,6 +1328,15 @@ On an existing file stream this does not change the file-position of the stream.
                            in b)))))
         (file-position in initial-pos))
       *endian*)))
+
+(defun elf-header-endianness-warn (header)
+  "Raise a warning if HEADER was read using the wrong endianness."
+  (when (if (eq *endian* :little)
+            (= (data-encoding header) 2)
+            (= (data-encoding header) 1))
+    (warn "Header read with wrong encoding ~S while data-encoding ~S."
+          *endian* (data-encoding header)))
+  header)
 
 (defun elf-header (file)
   (with-open-file (in file :element-type '(unsigned-byte 8))
@@ -1476,7 +1476,8 @@ Each element of the resulting list is a triplet of (offset size header)."
   (format t "-------------------------------------~%")
   (mapc (lambda-bind ((addr contents end))
                      (format t "~&0x~6,'0x ~18a 0x~6,'0x~%" addr contents end))
-        (list-memory-layout elf)))
+        (list-memory-layout elf))
+  nil)
 
 
 (defgeneric file-offset-of-ea (elf ea)
