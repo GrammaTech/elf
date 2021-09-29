@@ -30,6 +30,7 @@
    :all-symbols
    :file-offset-of-ea
    ;; Classes
+   :section
    :section-header :section-header-32 :section-header-64
    :elf-sym :elf-sym-32 :elf-sym-64
    :program-header :program-header-32 :program-header-64
