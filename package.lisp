@@ -29,6 +29,13 @@
    :mapslots :generic-copy :copy-elf :named-symbol :symbols :dyn-symbols
    :all-symbols
    :file-offset-of-ea
+   ;; Classes
+   :section-header :section-header-32 :section-header-64
+   :elf-sym :elf-sym-32 :elf-sym-64
+   :program-header :program-header-32 :program-header-64
+   :elf-rel :elf-rel-32 :elf-rel-64
+   :elf-rela :elf-rela-32 :elf-rela-64
+   :elf-dyn :elf-dyn-32 :elf-dyn-64
    ;; Modification functions
    :index-of-ea
    :sections-holding-ea
