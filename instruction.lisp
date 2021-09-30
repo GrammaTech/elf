@@ -19,8 +19,10 @@
   (:documentation "Parse an instruction from a string representation."))
 
 (defvar instruction-prefixes
-  (list "rep" "repe" "repz" "repne" "repnz"
-        "data16" "lock"))
+  (list "rep" "repe" "gs" "repz" "repne" "repnz"
+        "rex" "rex.WX" "rex.X" "rex.WRXB"
+        "cs" "ds" "fs" "es"
+        "data16" "lock" "notrack"))
 
 (defmethod from-string ((obj objdump-instruction) string)
   (unless (zerop (length string))
@@ -54,7 +56,7 @@
   (flet ((parse-register (string)
            (multiple-value-bind (match matches)
                (scan-to-strings
-                 "(xm{2}[0-9][0-5]\?|[abcdesixlp]\+|r[1-9][0-5]\?)"
+                 "([xyz]\?m{2}[0-9][0-5]\?|[abcdesixlp]\+|r[1-9][0-5]\?)"
                  (subseq string 1))
              (unless match (error "Failed to parse register ~S" string))
              (make-keyword (string-upcase (aref matches 0))))))
